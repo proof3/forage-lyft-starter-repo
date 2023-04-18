@@ -6,7 +6,7 @@ class Battery(ABC):
         super().__init__()
     
     @abstractmethod
-    def need_service(self):
+    def needs_service(self) -> bool:
         pass
 
 class SpindlerBattery(Battery):
@@ -14,13 +14,14 @@ class SpindlerBattery(Battery):
         self.last_service_date = last_service_date
         self.current_date = current_date
 
-    def need_service(self):
-        return (self.current_date - self.last_service_date).year >= 2
+    def needs_service(self) -> bool:
+        return (self.current_date - self.last_service_date).days > 365 * 2
     
 class NubbinBattery(Battery):
     def __init__(self, last_service_date: date, current_date: date) -> None:
         self.last_service_date = last_service_date
         self.current_date = current_date
 
-    def need_service(self):
-        return (self.current_date - self.last_service_date).year >= 4
+
+    def needs_service(self) -> bool:
+        return (self.current_date - self.last_service_date).days > 365 * 4
