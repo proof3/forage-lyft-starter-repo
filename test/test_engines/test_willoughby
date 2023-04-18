@@ -1,0 +1,11 @@
+import unittest
+from servicable.engine import WilloughbyEngine
+
+class TestWilloughbyEngine(unittest.TestCase):
+    def test_engine_should_be_serviced(self):
+        engine = WilloughbyEngine(0, 60001)
+        self.assertTrue(engine.needs_service())
+    
+    def test_engine_should_not_be_serviced(self):
+        engine = WilloughbyEngine(0, 2)
+        self.assertFalse(engine.needs_service())
